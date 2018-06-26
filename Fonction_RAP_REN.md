@@ -7,7 +7,7 @@ fct_rat <-function(age=0,cf=NULL){
   #-----calibrage Avril 2017----
   
   #on reduit l'échelle des variables sur [0,1] 
-  # après les avoir bornées 
+  #- après les avoir bornées 
   age.max<-24 #la fonction prendra la valeur 0 en age.max
   age.int1<-4/age.max
   age.int2<-12.5/age.max
@@ -41,12 +41,12 @@ fct_renego<-function(matres=0,spread=0,slope=NULL,lst.cf.ren=NULL){
   #----Evaluation proba de renégocioation
   #----calibrage Avril 2017----
   #matres en année, spread en taux: 0.01=1%
-  # lst.cf.ren contient la liste des coefficients à appliquer dans la fonction poly4.2var 
+  #- lst.cf.ren contient la liste des coefficients à appliquer dans la fonction poly4.2var 
   xmax=21
   ymax=0.0375
   
   #on reduit l'échelle des variables sur [0,1] 
-  # après les avoir bornées 
+  #- après les avoir bornées 
   dt.tmp<-data.table(x=matres/xmax,y=spread/ymax)
   
   dt.tmp[x>1,x:=1]
@@ -55,5 +55,5 @@ fct_renego<-function(matres=0,spread=0,slope=NULL,lst.cf.ren=NULL){
   dt.tmp[,pb.ren:= poly4.2var(x,y,lst.cf.ren[[4]],lst.cf.ren[[1]],lst.cf.ren[[2]],lst.cf.ren[[3]])]
   dt.tmp[pb.ren<0,pb.ren:=0]
   return(dt.tmp[,.(1-(1-pb.ren)^12)])
-  # on retourne le taux annualisé
-}  # Evaluation proba renégociation
+  #- on retourne le taux annualisé
+}  #- Evaluation proba renégociation
